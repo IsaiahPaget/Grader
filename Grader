@@ -1,0 +1,60 @@
+import sys
+
+
+def main():
+
+    # Ensure correct usage
+    if len(sys.argv) != 2:
+        sys.exit("Usage: python grader.py FILENAME")
+
+    #get input from txt file
+    file = sys.argv[1]
+    with open(file) as f:
+        str_input = f.read()
+
+    #initialize variables
+    letters = 0
+    words = 0
+    sentences = 0
+
+    #iterate over str_input
+    for i in str_input:
+        if i.isalpha():
+            letters += 1
+        else:
+            continue
+    print(f"{letters} Letters")
+
+    for j in str_input:
+        if j == "." or j == "?" or j == "!":
+            sentences +=1
+        else:
+            continue
+    print(f"{sentences} Sentences")
+
+    for y in str_input:
+        if y == " ":
+            words += 1
+        else:
+            continue
+    print(f"{words + 1} Words")
+
+    #finding averages
+    L = letters / (words + 1) *100
+    S = sentences / (words + 1) *100
+
+    #grade formula
+    x = round(0.0588 * L - 0.296 * S - 15.8)
+
+    #print grade
+    if x < 16 and x > 0:
+        print(f"Grade {x}")
+    elif x <= 0:
+        print(f"Before Grade 1")
+    else:
+        print("Grade 16+")
+
+
+#main stuff
+if __name__ == "__main__":
+    main()
